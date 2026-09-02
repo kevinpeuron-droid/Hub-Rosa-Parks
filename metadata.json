@@ -1,0 +1,6 @@
+{
+  "name": "App Dashboard",
+  "description": "Un tableau de bord pour organiser et accéder à toutes vos applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
