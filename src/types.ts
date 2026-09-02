@@ -15,8 +15,7 @@ export interface Folder extends BaseItem {
 
 export interface AppLink extends BaseItem {
   type: 'app';
-  githubUrl?: string;
-  vercelUrl?: string;
+  url?: string;
   description?: string;
 }
 

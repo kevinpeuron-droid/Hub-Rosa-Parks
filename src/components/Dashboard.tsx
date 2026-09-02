@@ -6,12 +6,11 @@ import {
   Folder as FolderIcon, 
   LayoutGrid, 
   Plus, 
-  Github, 
-  Globe, 
   MoreVertical, 
   Trash2,
   ChevronRight,
-  Home
+  Home,
+  ExternalLink
 } from 'lucide-react';
 
 interface DashboardProps {
@@ -74,8 +73,7 @@ export default function Dashboard({ user }: DashboardProps) {
         type: 'app',
         name,
         description: formData.get('description') as string,
-        githubUrl: formData.get('githubUrl') as string,
-        vercelUrl: formData.get('vercelUrl') as string,
+        url: formData.get('url') as string,
         parentId: currentFolderId
       } as Omit<AppLink, 'id' | 'createdAt'>);
     }
@@ -264,23 +262,20 @@ export default function Dashboard({ user }: DashboardProps) {
                     {app.type === 'app' && app.description ? app.description : 'No description provided.'}
                   </p>
                   <div className="flex gap-2 mb-4">
-                    {app.type === 'app' && app.githubUrl && (
+                    {app.type === 'app' && app.url && (
                       <div className="px-2 py-1 bg-gray-100 rounded text-[10px] font-medium text-gray-600 flex items-center gap-1">
-                        <Github className="w-3 h-3" /> GitHub
-                      </div>
-                    )}
-                    {app.type === 'app' && app.vercelUrl && (
-                      <div className="px-2 py-1 bg-gray-100 rounded text-[10px] font-medium text-gray-600 flex items-center gap-1">
-                        <Globe className="w-3 h-3" /> Vercel
+                        <ExternalLink className="w-3 h-3" /> Lien externe
                       </div>
                     )}
                   </div>
-                  {(app.type === 'app' && app.vercelUrl) ? (
-                     <a href={app.vercelUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
-                       <button className="w-full py-2.5 bg-[#F9FAFB] hover:bg-black hover:text-white rounded-xl text-sm font-semibold transition-colors">Open Application</button>
+                  {(app.type === 'app' && app.url) ? (
+                     <a href={app.url} target="_blank" rel="noopener noreferrer" className="block w-full mt-auto">
+                       <button className="w-full py-2.5 bg-[#F9FAFB] hover:bg-black hover:text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                         <ExternalLink className="w-4 h-4" /> Ouvrir l'application
+                       </button>
                      </a>
                   ) : (
-                    <button className="w-full py-2.5 bg-[#F9FAFB] text-gray-400 cursor-not-allowed rounded-xl text-sm font-semibold transition-colors">No Link Available</button>
+                    <button className="w-full py-2.5 bg-[#F9FAFB] text-gray-400 cursor-not-allowed rounded-xl text-sm font-semibold transition-colors mt-auto">Aucun lien</button>
                   )}
                 </div>
               ))}
@@ -338,20 +333,11 @@ export default function Dashboard({ user }: DashboardProps) {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">GitHub URL</label>
+                    <label className="block text-sm font-medium text-neutral-700 mb-1">URL de l'application</label>
                     <input 
                       type="url" 
-                      name="githubUrl"
-                      placeholder="https://github.com/..."
-                      className="w-full border border-neutral-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Live URL (Vercel/etc)</label>
-                    <input 
-                      type="url" 
-                      name="vercelUrl"
-                      placeholder="https://...vercel.app"
+                      name="url"
+                      placeholder="https://..."
                       className="w-full border border-neutral-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
