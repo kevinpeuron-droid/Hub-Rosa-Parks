@@ -5,7 +5,9 @@ import { DashboardItem } from '../types';
 const ITEMS_COLLECTION = 'items';
 
 export const getItems = async (userId: string): Promise<DashboardItem[]> => {
-  const q = query(collection(db, ITEMS_COLLECTION), where("userId", "==", userId));
+  // On récupère tous les éléments de la collection sans filtrer par appareil
+  // afin que les données soient synchronisées entre l'ordinateur et le téléphone.
+  const q = query(collection(db, ITEMS_COLLECTION));
   const querySnapshot = await getDocs(q);
   
   const items: DashboardItem[] = [];
