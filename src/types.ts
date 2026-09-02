@@ -17,6 +17,8 @@ export interface AppLink extends BaseItem {
   type: 'app';
   url?: string;
   description?: string;
+  username?: string;
+  password?: string;
 }
 
 export type DashboardItem = Folder | AppLink;
